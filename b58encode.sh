@@ -12,3 +12,4 @@ encode() {
     done
 }
 
+encode $1 
