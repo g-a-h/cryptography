@@ -1,7 +1,9 @@
-#!/usr/bin/env zsh 
+#!/usr/bin/env zsh
 # gh - 2022
 # scrape wallets
 #######
+
+proc=$1
 
 putup() {
   tr "[a-f]" "[A-F]"
@@ -24,19 +26,25 @@ hex2() {
   encode "$2$1$(xxd -p -r <<<"$2$1" | openssl dgst -sha256 -binary | openssl dgst -sha256 -binary | xxd -p -c 80 | head -c 8 | putup)"
 }
 
-gen() { 
+gen() {
 pk=$(openssl ecparam -genkey -name secp256k1 -noout)
 pkd=$(openssl ec -text <<<$pk 2>/dev/null)
 hash=$(openssl ec -pubout -outform DER <<<$pk 2>/dev/null | tail -c 65 | openssl dgst -sha256 -binary | openssl dgst -rmd160 -binary | xxd -p -c 80 | putup) && echo -e "hash\t:\t$hash"
 pkhex=$(calchex $pkd) && echo -e "pubkey\t:\t$pkhex"
 addr=$(hex2 $hash "00") && echo -e "address\t:\t$addr"
 wif=$(hex2 $pkhex "80") && echo -e "wif\t:\t$wif"
-} 
+}
+
+main() {
+  bal=$(gen | tee $1 | grep addr | awk -F':' '{ print $2 }' | xargs -I % curl "https://blockchain.info/rawaddr/%" 2>&1 | sed 's/,/\n/g' | grep final | awk -F':' '{ print $2 }')
+  [[ $bal -eq 0 ]] && {
+    echo -e "$(grep addr $1) -- zero balance wallet"
+    } || {
+      echo -e "/!\ non-zero balance wallet found /!\ \n $(cat temp)" | tee -a $1
+      cat $1 > wallet-$(grep addr $1 | awk -F':' '{ print $2 }')
+      }
+}
 
 while true ; do
-   bal=$(gen | tee temp | grep addr | awk -F':' '{ print $2 }' | xargs -I % curl "https://blockchain.info/rawaddr/%" 2>&1 | sed 's/,/\n/g' | grep final | awk -F':' '{ print $2 }')
-  [[ $bal -eq 0 ]] && : || {
-    echo -e "/!\ non-zero balance wallet found /!\ \n $(cat temp)" | tee -a temp 
-    cat temp > wallet-$(ls . | grep wallet- | wc -l)
-  }
+  main $proc
 done
