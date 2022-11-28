@@ -6,12 +6,13 @@ simple, robust random bitcoin wallet generator and balance checker
 
 ![alt text](./img/screenshot.png)
 
++ parallelize processes for increased computes
 run 100 processes:
 ```bash
 $ ./run.zsh 100 
 ```
 
-logging:
++ logging:
 ```bash 
 $ tail nohup.out
 address	:	16MaVnvAMtAbxsCUSRUByWzDtvt7PfRUq5 -- zero balance wallet
