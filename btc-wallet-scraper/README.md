@@ -1,5 +1,8 @@
 # btc wallet scraper 
 simple, robust random bitcoin wallet generator and balance checker
+ + from btc algorithm, generates keys, wif, address 
+ + checks balance on blockchain.info 
+ + stores address and wif of non-zero balance wallets
 
 ![alt text](./img/screenshot.png)
 
