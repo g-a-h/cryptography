@@ -1,7 +1,7 @@
 # btc wallet scraper 
 simple, robust random bitcoin wallet generator and balance checker
 
-![alt text](./img.png)
+![alt text](./scraper.png)
 
 run 100 processes:
 ```bash
