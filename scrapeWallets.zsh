@@ -34,9 +34,9 @@ wif=$(hex2 $pkhex "80") && echo -e "wif\t:\t$wif"
 } 
 
 while true ; do
-   bal=$(gen | grep addr | tee temp | awk -F':' '{ print $2 }' | xargs -I % curl "https://blockchain.info/rawaddr/%" 2>&1 | sed 's/,/\n/g' | grep final | awk -F':' '{ print $2 }')
+   bal=$(gen | tee temp | grep addr | awk -F':' '{ print $2 }' | xargs -I % curl "https://blockchain.info/rawaddr/%" 2>&1 | sed 's/,/\n/g' | grep final | awk -F':' '{ print $2 }')
   [[ $bal -eq 0 ]] && : || {
-    echo -e "/!\ non-zero balance wallet found \n $(cat temp)"
+    echo -e "/!\ non-zero balance wallet found /!\ \n $(cat temp)" | tee -a temp 
     cat temp > wallet-$(ls . | grep wallet- | wc -l)
   }
 done
