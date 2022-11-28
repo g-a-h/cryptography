@@ -1,4 +1,4 @@
-#!/usr/local/env zsh
+#!/usr/bin/env zsh
 # gh - 2022
 # genkeybtc
 #######
