@@ -45,6 +45,8 @@ main() {
       }
 }
 
+#######
+# run 
 while true ; do
   main $proc
 done
