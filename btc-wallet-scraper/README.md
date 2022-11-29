@@ -6,11 +6,17 @@ simple, robust random bitcoin wallet generator and balance checker:
 
 ![alt text](./img/screenshot.png)
 
+```
+dependencies 
+++ zsh 5.1+ 
+++ LibreSSL 2.8.0+ 
+```
+
 features: 
 + parallelize processes for increased computes
-run 100 processes:
+run 10 parallel processes:
 ```bash
-$ ./run.zsh 100 
+$ ./run.zsh 10
 ```
 
 + logging:
