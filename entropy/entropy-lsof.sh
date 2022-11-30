@@ -6,7 +6,7 @@ declare -a ntrop=() ;
 while true ; do
   (( iter++ ))
   [[ $iter -ge 24 ]] && break || {
-  top=$(lsof  |  awk '{ print $6 }' | grep 0x  | hexdump | sum | awk '{ print $1 }' | cut -b1-5)
+  top=$(lsof  |  awk '{ print $6 }' | grep 0x  | hexdump | sum | awk '{ print $1 }' | cut -b1-4)
   while true ; do
     btm=$(od -A n -t d -N 1 /dev/urandom)
     [[ $btm -eq 0 ]] && : || break
