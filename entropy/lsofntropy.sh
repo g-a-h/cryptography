@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# gh - 2022
+#     gh - 2022
 # entropy from lsof 
 
 iter=0 ;
