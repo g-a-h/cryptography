@@ -15,7 +15,8 @@ while true ; do
     rnd=$(expr $top "/" $btm)
     [[ $rnd -ge 2047 ]] && : || { 
       [[ ! " ${ntrop[*]} " =~ " ${rnd} " ]] && ntrop+=("${rnd}")
-      } 
+    } 
+  done 
   }
 done
 echo ${ntrop[@]}
