@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 # gh - 2022
 # entropy from lsof
 
@@ -15,10 +14,8 @@ while true ; do
   while true ; do
     rnd=$(expr $top "/" $btm)
     [[ $rnd -ge 2047 ]] && : || { 
-      [[ " ${ntrop[*]} " =~ " ${rnd} " ]] && : || {
-        ntrop+=("${rnd}")
+      [[ ! " ${ntrop[*]} " =~ " ${rnd} " ]] && ntrop+=("${rnd}")
       } 
-    } 
   }
 done
 echo ${ntrop[@]}
