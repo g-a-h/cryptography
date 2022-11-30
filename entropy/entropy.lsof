@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # gh - 2022
-# entropy from lsof 
+# entropy from lsof
 
 iter=0 ;
 declare -a ntrop=() ;
@@ -15,7 +15,7 @@ while true ; do
   while true ; do
     rnd=$(expr $top "/" $btm)
     [[ $rnd -ge 2047 ]] && : || break
-  done 
+  done
   ntrop+=("${rnd}")
   }
 done
