@@ -1,6 +1,6 @@
 #!/usr/bin/env bash 
 # gh - 2022
-# entropy 
+# generic entropy 
 
 declare -a ntrop=() ;
 while : ; do
